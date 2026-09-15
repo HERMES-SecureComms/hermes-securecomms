@@ -16,3 +16,21 @@ Thumbs.db
 *.swp
 *~
 
+
+# v0.2 local secrets and security state (public fixtures are kept separately)
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+secrets/
+keys/
+private/
+*.key
+*.pem
+*.private
+credential_keys*.json
+credential-keys*.json
+production*.json
+local_security_config.h
+*.state.json
+*.state.json.lock

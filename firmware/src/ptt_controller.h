@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include "hermes_security.h"
 
 namespace hermes {
 
@@ -14,8 +15,11 @@ class PttController {
   void update(bool authenticated, uint32_t nowMs);
 
   bool isTxEnabled() const;
+  void updateSecurity(security::Engine& engine, uint64_t nowMs);
 
  private:
+  void updateButton(uint32_t nowMs);
+  void applyAuthorization(bool authenticated, uint32_t nowMs);
   bool readButtonPressed() const;
   void setTxEnabled(bool enabled, uint32_t nowMs);
   void logTimedEvent(const __FlashStringHelper* event, uint32_t nowMs) const;

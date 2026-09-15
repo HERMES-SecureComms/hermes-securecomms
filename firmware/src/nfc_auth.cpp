@@ -10,7 +10,7 @@ static_assert(credentials::AUTHORIZED_UID_LENGTH <= config::NFC_UID_MAX_LENGTH,
               "Configured NFC UID is longer than the supported PN532 UID buffer");
 
 NfcAuth::NfcAuth()
-    : reader_(config::PIN_PN532_SS, &SPI),
+    : transport_(),
       operational_(false),
       authorized_(false),
       credentialObserved_(false),
@@ -27,29 +27,8 @@ bool NfcAuth::begin() {
   hasAuthorizedTimestamp_ = false;
   lastUidLength_ = 0;
 
-  SPI.begin(config::PIN_PN532_SCK, config::PIN_PN532_MISO,
-            config::PIN_PN532_MOSI, config::PIN_PN532_SS);
-  reader_.begin();
-
-  const uint32_t version = reader_.getFirmwareVersion();
-  if (version == 0) {
-    Serial.println(F("[HERMES] PN532 ERROR - FIRMWARE NOT DETECTED"));
-    return false;
-  }
-
-  if (!reader_.SAMConfig()) {
-    Serial.println(F("[HERMES] PN532 ERROR - SAM CONFIGURATION FAILED"));
-    return false;
-  }
-
-  operational_ = true;
-  Serial.println(F("[HERMES] PN532 detected"));
-  Serial.print(F("[HERMES] PN532 firmware: "));
-  Serial.print((version >> 16) & 0xFF, DEC);
-  Serial.print('.');
-  Serial.println((version >> 8) & 0xFF, DEC);
-  Serial.println(F("[HERMES] Waiting for credential"));
-  return true;
+  operational_ = transport_.begin();
+  return operational_;
 }
 
 void NfcAuth::update(uint32_t nowMs) {
@@ -60,9 +39,7 @@ void NfcAuth::update(uint32_t nowMs) {
 
   uint8_t uid[config::NFC_UID_MAX_LENGTH] = {0};
   uint8_t uidLength = 0;
-  const bool detected = reader_.readPassiveTargetID(
-      PN532_MIFARE_ISO14443A, uid, &uidLength,
-      config::NFC_POLL_TIMEOUT_MS);
+  const bool detected = transport_.readUid(uid, uidLength);
 
   if (detected && uidLength > 0 && uidLength <= config::NFC_UID_MAX_LENGTH) {
     const bool isNewObservation =
