@@ -1,0 +1,14 @@
+{
+  "firmware_authored_files_identical": 21,
+  "legacy_reference_hash_check": "PASS",
+  "local_document_links": "PASS",
+  "python_tests_passed": 173,
+  "native_checks_passed": 1308,
+  "golden_parity_scenarios_passed": 9,
+  "standalone_cli_scenarios_passed": 9,
+  "firmware_builds_passed": 6,
+  "firmware_hardware_execution": "NOT PERFORMED: no physical board",
+  "default_secure_nfc_adapter": "UNPROVISIONED / FAIL-CLOSED",
+  "git_commands_executed": false,
+  "actual_radio_or_rf_operations": false
+}

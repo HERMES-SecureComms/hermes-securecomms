@@ -1,4 +1,6 @@
-# Test Plan
+# HERMES Test Plan
+
+> Current security design: [v0.2 architecture](V0_2_ARCHITECTURE.md) and [security tests](SECURITY_TEST_PLAN.md).
 
 프로젝트를 개발 의존성과 함께 설치한 뒤 루트에서 `pytest`를 실행한다.
 실제 sleep이나 하드웨어는 필요 없다. 핵심 fixture는 `FakeClock`과 예제

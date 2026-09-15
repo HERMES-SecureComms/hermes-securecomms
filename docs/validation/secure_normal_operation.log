@@ -1,0 +1,12 @@
+{"timestamp_ms": 0, "event": "AUTH_CHALLENGE_CREATED", "device_id": "HPTT-001", "credential_id": null, "reason": null}
+{"timestamp_ms": 0, "event": "AUTH_SUCCESS", "device_id": "HPTT-001", "credential_id": "GLOVE-001", "reason": null}
+{"timestamp_ms": 0, "event": "SESSION_CREATED", "device_id": "HPTT-001", "credential_id": "GLOVE-001", "reason": null}
+{"timestamp_ms": 0, "event": "TX_ALLOWED", "device_id": "HPTT-001", "credential_id": "GLOVE-001", "reason": "ALLOW_TX"}
+{"timestamp_ms": 0, "event": "TX_DENIED", "device_id": "HPTT-001", "credential_id": "GLOVE-001", "reason": "DENY_PTT_RELEASED"}
+Step 1: authenticate: PASS DENY_PTT_RELEASED
+Step 2: ptt_press: PASS ALLOW_TX
+Step 3: ptt_release: PASS DENY_PTT_RELEASED
+Scenario: secure_normal_operation
+Passed: 3
+Failed: 0
+RESULT: PASS

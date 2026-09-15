@@ -1,0 +1,8 @@
+{"timestamp_ms": 0, "event": "REVOCATION_LIST_UPDATED", "device_id": "HPTT-001", "credential_id": null, "reason": null}
+{"timestamp_ms": 0, "event": "POLICY_ROLLBACK_DETECTED", "device_id": "HPTT-001", "credential_id": null, "reason": "REJECT_ROLLBACK"}
+Step 1: load_crl: PASS DENY_NO_CREDENTIAL
+Step 2: load_crl: PASS DENY_POLICY_ROLLBACK
+Scenario: revocation_list_rollback
+Passed: 2
+Failed: 0
+RESULT: PASS

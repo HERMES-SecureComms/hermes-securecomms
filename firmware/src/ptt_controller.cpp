@@ -48,7 +48,7 @@ void PttController::latchPermanentFault() {
   txEnabled_ = false;
 }
 
-void PttController::update(bool authenticated, uint32_t nowMs) {
+void PttController::updateButton(uint32_t nowMs) {
   const bool currentRawPressed = readButtonPressed();
   if (currentRawPressed != rawPressed_) {
     rawPressed_ = currentRawPressed;
@@ -67,6 +67,20 @@ void PttController::update(bool authenticated, uint32_t nowMs) {
     }
   }
 
+}
+
+void PttController::update(bool authenticated, uint32_t nowMs) {
+  updateButton(nowMs);
+  applyAuthorization(authenticated, nowMs);
+}
+
+void PttController::updateSecurity(security::Engine& engine, uint64_t nowMs) {
+  updateButton(static_cast<uint32_t>(nowMs));
+  const auto decision = engine.tick(nowMs, stablePressed_);
+  applyAuthorization(decision == security::Decision::ALLOW_TX, static_cast<uint32_t>(nowMs));
+}
+
+void PttController::applyAuthorization(bool authenticated, uint32_t nowMs) {
   const bool shouldEnableTx =
       systemReady_ && !permanentFault_ && authenticated && stablePressed_;
   setTxEnabled(shouldEnableTx, nowMs);

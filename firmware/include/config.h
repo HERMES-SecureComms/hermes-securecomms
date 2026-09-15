@@ -2,6 +2,13 @@
 
 #include <Arduino.h>
 
+#if defined(HERMES_AUTH_MODE_UID_POC) && defined(HERMES_AUTH_MODE_SECURE)
+#error "Choose exactly one authentication mode"
+#endif
+#if !defined(HERMES_AUTH_MODE_UID_POC) && !defined(HERMES_AUTH_MODE_SECURE)
+#define HERMES_AUTH_MODE_SECURE 1
+#endif
+
 namespace hermes {
 namespace config {
 
@@ -17,6 +24,8 @@ constexpr uint8_t PIN_TX_GATE = 5;
 constexpr uint8_t PIN_LED_ALLOW = 6;
 constexpr uint8_t PIN_LED_DENY = 7;
 
+constexpr uint64_t SESSION_TIMEOUT_MS = 5000; // PoC experiment parameter.
+constexpr uint64_t CHALLENGE_TIMEOUT_MS = 2000;
 constexpr uint32_t SERIAL_BAUD = 115200;
 constexpr uint32_t AUTH_GRACE_PERIOD_MS = 1500;
 constexpr uint32_t PTT_DEBOUNCE_MS = 30;
