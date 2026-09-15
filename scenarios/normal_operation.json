@@ -1,0 +1,9 @@
+{
+  "name": "normal-operation",
+  "steps": [
+    {"action": "attach_credential", "credential_id": "GLOVE-001", "expect": {"auth_state": "AUTHORIZED", "tx_enabled": false}},
+    {"action": "ptt_press", "expect": {"decision": "ALLOW", "tx_enabled": true}},
+    {"action": "ptt_release", "expect": {"ptt_state": "RELEASED", "decision": "DENY_PTT_RELEASED", "tx_enabled": false}}
+  ]
+}
+

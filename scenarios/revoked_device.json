@@ -1,0 +1,12 @@
+{
+  "name": "revoked-device",
+  "steps": [
+    {"action": "attach_credential", "credential_id": "GLOVE-001", "expect": {"auth_state": "AUTHORIZED"}},
+    {"action": "ptt_press", "expect": {"decision": "ALLOW"}},
+    {"action": "revoke_device", "expect": {"auth_state": "REVOKED", "session_valid": false, "decision": "DENY_DEVICE_REVOKED", "tx_enabled": false}},
+    {"action": "ptt_release", "expect": {"tx_enabled": false}},
+    {"action": "ptt_press", "expect": {"decision": "DENY_DEVICE_REVOKED", "tx_enabled": false}},
+    {"action": "attach_credential", "credential_id": "GLOVE-001", "expect": {"auth_state": "REVOKED", "decision": "DENY_DEVICE_REVOKED"}}
+  ]
+}
+

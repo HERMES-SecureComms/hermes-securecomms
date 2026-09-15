@@ -16,12 +16,13 @@ Thumbs.db
 *.swp
 *~
 
-
 # v0.2 local secrets and security state (public fixtures are kept separately)
 .venv/
 __pycache__/
 .pytest_cache/
 *.pyc
+*.egg-info/
+
 secrets/
 keys/
 private/

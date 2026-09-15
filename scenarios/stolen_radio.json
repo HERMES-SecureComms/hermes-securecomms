@@ -1,0 +1,12 @@
+{
+  "name": "stolen-radio",
+  "steps": [
+    {"action": "attach_credential", "credential_id": "GLOVE-001", "expect": {"auth_state": "AUTHORIZED"}},
+    {"action": "ptt_press", "expect": {"decision": "ALLOW"}},
+    {"action": "ptt_release", "expect": {"tx_enabled": false}},
+    {"action": "detach_credential", "expect": {"auth_state": "GRACE_PERIOD", "session_valid": true}},
+    {"action": "advance_time", "milliseconds": 1600, "expect": {"auth_state": "UNAUTHENTICATED", "decision": "DENY_CREDENTIAL_EXPIRED"}},
+    {"action": "ptt_press", "expect": {"decision": "DENY_CREDENTIAL_EXPIRED", "tx_enabled": false}}
+  ]
+}
+

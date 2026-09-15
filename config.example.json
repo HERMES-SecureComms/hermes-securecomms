@@ -1,0 +1,10 @@
+{
+  "device_id": "HPTT-001",
+  "grace_period_ms": 1500,
+  "credentials": [
+    {"credential_id": "GLOVE-001", "operator_id": "OPERATOR-001", "authorized": true, "revoked": false},
+    {"credential_id": "GLOVE-002", "operator_id": "OPERATOR-002", "authorized": true, "revoked": false},
+    {"credential_id": "BLOCKED-001", "operator_id": "OPERATOR-003", "authorized": false, "revoked": false}
+  ]
+}
+
