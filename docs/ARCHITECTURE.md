@@ -1,3 +1,5 @@
+> v0.1 reference retained for regression. Current security design: [v0.2 architecture](V0_2_ARCHITECTURE.md) and [security tests](SECURITY_TEST_PLAN.md).
+
 # Architecture
 
 ## Objective

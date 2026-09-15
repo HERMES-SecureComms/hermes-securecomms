@@ -1,0 +1,47 @@
+[
+  {
+    "scenario": "counter_rollback.json",
+    "exit_code": 0,
+    "result": "PASS"
+  },
+  {
+    "scenario": "credential_revoked.json",
+    "exit_code": 0,
+    "result": "PASS"
+  },
+  {
+    "scenario": "device_binding_failure.json",
+    "exit_code": 0,
+    "result": "PASS"
+  },
+  {
+    "scenario": "replay_attack.json",
+    "exit_code": 0,
+    "result": "PASS"
+  },
+  {
+    "scenario": "revocation_list_rollback.json",
+    "exit_code": 0,
+    "result": "PASS"
+  },
+  {
+    "scenario": "secure_normal_operation.json",
+    "exit_code": 0,
+    "result": "PASS"
+  },
+  {
+    "scenario": "session_expired_during_tx.json",
+    "exit_code": 0,
+    "result": "PASS"
+  },
+  {
+    "scenario": "system_fault_during_session.json",
+    "exit_code": 0,
+    "result": "PASS"
+  },
+  {
+    "scenario": "tampered_revocation_list.json",
+    "exit_code": 0,
+    "result": "PASS"
+  }
+]

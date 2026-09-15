@@ -1,3 +1,5 @@
+#include "config.h"
+#ifdef HERMES_AUTH_MODE_UID_POC
 #include <Arduino.h>
 
 #include "config.h"
@@ -43,3 +45,5 @@ void loop() {
   delay(hermes::config::MAIN_LOOP_DELAY_MS);
 }
 
+
+#endif

@@ -1,0 +1,8 @@
+{"timestamp_ms": 0, "event": "AUTH_CHALLENGE_CREATED", "device_id": "HPTT-099", "credential_id": null, "reason": null}
+{"timestamp_ms": 0, "event": "BINDING_FAILED", "device_id": "HPTT-099", "credential_id": "GLOVE-001", "reason": "DEVICE_BINDING_MISMATCH"}
+Step 1: authenticate: PASS DENY_BINDING
+Step 2: ptt_press: PASS DENY_BINDING
+Scenario: device_binding_failure
+Passed: 2
+Failed: 0
+RESULT: PASS

@@ -1,73 +1,26 @@
-# Security Policy and PoC Limitations
+# Security status — v0.2
 
-## Status
+This is a Security PoC, unsuitable for production, tactical or safety-critical
+use. It models cryptographic credential possession and simulated PTT permission;
+it does not establish a human identity or protect an actual RF network.
 
-HERMES PoC v0.1 is a functional breadboard experiment. It does **not** implement
-secure operator authentication and is not suitable for operational, safety-
-critical, tactical, or production use.
+HMAC challenge-response, replay checks, signed CRLs, version checks, binding,
+fixed-lifetime sessions and fail-closed policies are implemented in the reference
+and portable firmware core. Default hardware firmware is unprovisioned and denies.
+The secure NFC and secure-element adapters await selected hardware. Mock fixtures
+are public test keys. **SoftwareKeyStore must not be used in production.**
 
-The current code compares an NFC tag UID with a value compiled into firmware.
-`AUTH SUCCESS` means only “the observed bytes match the configured bytes.” It
-must not be interpreted as a cryptographic assertion of identity.
+Read [the v0.2 threat model](docs/THREAT_MODEL_V0_2.md) and
+[key/storage limitations](docs/KEY_MANAGEMENT.md). Firmware replacement can bypass
+the policy engine; no secure boot, flash/NVS encryption, tamper defense or hardware
+anti-rollback is enabled. Genuine credential theft, coercion, live relay, advanced
+side channels, physical extraction and RF/radio firmware compromise remain.
 
-## Known and intended limitations
+Only GPIO/LED simulation is supported. External wiring, reset, power failure,
+pin damage or malicious firmware can defeat a software-only default-off rule.
+Never connect GPIO directly to real radio PTT equipment.
 
-- **UID cloning:** ISO14443A UIDs can be observed and, for compatible tags,
-  copied or emulated. A whitelist does not establish authenticity.
-- **No replay resistance:** There is no nonce, counter, freshness proof, mutual
-  authentication, or cryptographic challenge-response.
-- **No secure element:** The design has no protected key storage or isolated
-  cryptographic operations. The example UID is not a key.
-- **No physical-tampering defense:** Exposed SPI, GPIO, flash, and breadboard
-  wiring can be probed, replaced, or manipulated.
-- **No credential-theft defense:** Possession of the configured/cloned tag is
-  sufficient for the PoC check; there is no PIN, biometric, liveness, or second
-  factor.
-- **No firmware trust chain:** Secure boot, flash encryption, signed update
-  policy, rollback prevention, and debug lockdown are not configured here.
-- **No radio integration:** GPIO5 is a simulation output only. Radio electrical
-  safety, isolation, fault containment, and RF behavior have not been assessed.
-- **Grace-window exposure:** A last valid UID read remains authorized for the
-  configured 1,500 ms to tolerate NFC read instability. This is not a designed
-  security session timeout.
-- **No runtime PN532 integrity monitoring:** Initialization failure latches TX
-  off, but ordinary “no tag” polling responses cannot by themselves distinguish
-  removal, interference, wiring faults, or active manipulation.
-
-These are intentional constraints of PoC v0.1, not defects hidden behind a
-security claim. The next credential phase is intended to replace UID comparison
-with Secure NFC, cryptographic challenge-response, explicit session management,
-and secure-element-backed keys after a threat model and protocol review.
-
-## Fail-closed claims and boundary
-
-The firmware commands `TX_GATE` LOW before peripheral setup, whenever PTT is
-released, whenever authorization is false or expired, and permanently after a
-PN532 initialization failure. Unknown logical states therefore do not command
-TX HIGH.
-
-This software invariant does not guarantee a physical voltage during chip reset,
-loss of power, pin damage, malicious firmware, or external shorting. A real
-system needs a separately validated hardware default-off circuit and independent
-safety analysis.
-
-## Safe testing
-
-> **ESP32 GPIO를 실제 무전기의 PTT 라인에 직접 연결하지 말 것.**
-
-Do not connect GPIO5—or any ESP32 GPIO—directly to a real radio PTT line. Limit
-testing to LEDs and high-impedance instruments. Radio integration requires prior
-electrical characterization and an appropriate isolated interface.
-
-Do not use this PoC to protect sensitive or emergency communications. Test only
-with hardware and spectrum usage for which you have authorization; this version
-does not generate RF.
-
-## Reporting security issues
-
-When opening a private security report for a future hosted repository, include
-the affected commit, hardware configuration, reproduction steps, observed
-output, expected fail-closed behavior, and whether GPIO5 was electrically
-monitored. Do not include real keys, sensitive radio configuration, or personal
-credential data in a public issue.
-
+When reporting a security issue, include the configuration, protocol/state
+transition, expected denial and observed result. Do not include production keys,
+private credential data or sensitive radio settings. Legacy limitations are
+archived in [SECURITY_V0_1.md](docs/SECURITY_V0_1.md).

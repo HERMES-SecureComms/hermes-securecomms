@@ -1,0 +1,20 @@
+{"scenario":"secure_normal_operation","decision":"ALLOW_TX"}
+{"scenario":"replay_attack","decision":"DENY_REPLAY"}
+{"scenario":"counter_rollback","decision":"DENY_COUNTER_ROLLBACK"}
+{"scenario":"session_expired_during_tx","decision":"DENY_SESSION_EXPIRED"}
+{"scenario":"credential_revoked","decision":"DENY_CREDENTIAL_REVOKED"}
+{"scenario":"device_binding_failure","decision":"DENY_BINDING"}
+{"scenario":"revocation_list_rollback","decision":"DENY_POLICY_ROLLBACK"}
+{"scenario":"tampered_revocation_list","decision":"DENY_SYSTEM_FAILURE"}
+{"scenario":"system_fault_during_session","decision":"ALLOW_TX"}
+Native security / GPIO checks: 1308 PASS
+PARITY PASS: secure_normal_operation: ALLOW_TX
+PARITY PASS: replay_attack: DENY_REPLAY
+PARITY PASS: counter_rollback: DENY_COUNTER_ROLLBACK
+PARITY PASS: session_expired_during_tx: DENY_SESSION_EXPIRED
+PARITY PASS: credential_revoked: DENY_CREDENTIAL_REVOKED
+PARITY PASS: device_binding_failure: DENY_BINDING
+PARITY PASS: revocation_list_rollback: DENY_POLICY_ROLLBACK
+PARITY PASS: tampered_revocation_list: DENY_SYSTEM_FAILURE
+PARITY PASS: system_fault_during_session: ALLOW_TX
+9 firmware/Python golden decisions PASS; protocol/CRL vectors checked by native suite.

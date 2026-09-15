@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Adafruit_PN532.h>
+#include "credential_transport.h"
 #include <Arduino.h>
 
 #include "config.h"
@@ -23,7 +23,7 @@ class NfcAuth {
   void rememberUid(const uint8_t* uid, uint8_t uidLength);
   void printUid(const uint8_t* uid, uint8_t uidLength) const;
 
-  Adafruit_PN532 reader_;
+  PN532Transport transport_;
   bool operational_;
   bool authorized_;
   bool credentialObserved_;

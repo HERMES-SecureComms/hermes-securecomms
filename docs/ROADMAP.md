@@ -1,47 +1,18 @@
 # Roadmap
 
-Each phase is gated by evidence from the preceding phase. Features listed after
-v0.1 are direction, not claims about the current repository.
+- **v0.1 (preserved):** UID functional demo and GPIO/PTT/LED regression mode.
+- **v0.2 (this Security PoC):** per-credential HMAC authentication, replay/counter
+  controls, Ed25519 CRLs, version checks, device binding, fixed sessions, pure
+  policy, simulator and portable firmware tests. Hardware adapters are explicit
+  unprovisioned boundaries; `secure-mock` executes the firmware security flow.
+- **v0.3 security hardening:** selected secure NFC adapter, real secure-element
+  KeyStore, provisioning, Secure Boot V2, Flash/NVS Encryption, secure updates,
+  persistent counter/CRL power-loss and wear validation, bounded NFC scheduling.
+- **v1.0 assurance work:** physical tamper/default-off design, hardware
+  anti-rollback, protected key lifecycle, authority rotation, on-device security
+  review and measured performance. None is a claim of this PoC.
 
-## v0.1 — Functional gate PoC (current)
-
-- UID-based NFC identifier comparison
-- PTT gate simulation on an ESP32-S3 GPIO
-- Green allow and red deny indications
-- Transition-based serial logs and manual test plan
-
-Exit evidence: all cases in `TEST_PLAN.md` pass on documented hardware. UID
-matching remains intentionally non-secure.
-
-## v0.2 — Credential security
-
-- Secure NFC credential evaluation
-- Cryptographic challenge-response
-- Explicit session establishment, expiry, and re-authentication behavior
-- Secure-element selection and key lifecycle threat analysis
-
-## v0.3 — Radio/headset electrical interface
-
-- Characterize target PTT voltage, current, polarity, grounding, and keying mode
-- Design and validate an isolated/default-off interface using an appropriate
-  optocoupler, transistor, MOSFET, or analog switch
-- Define headset/radio connector behavior and fault injection tests
-
-No direct GPIO-to-radio connection is permitted during v0.1.
-
-## v0.4 — Fleet and control-plane research
-
-- Device binding and credential-to-device policy
-- Remote revocation behavior, including disconnected operation
-- Meshtastic control-plane feasibility study
-
-OpenMANET, ATAK, and Bluetooth may be assessed as optional integrations. They
-are not dependencies or implemented features of the current PoC.
-
-## v1.0 — Hardened field prototype
-
-- Custom PCB with deterministic hardware default-off behavior
-- Hardened enclosure and tamper considerations
-- Secure element and protected boot/update chain
-- Environmental, usability, security, and field testing
-
+[Threat model and hardening details](THREAT_MODEL_V0_2.md).
+The earlier exploratory roadmap is retained in [ROADMAP_V0_1.md](ROADMAP_V0_1.md).
+Radio/RF, network integrations, dashboard/cloud and custom hardware are outside
+this v0.2 implementation.
